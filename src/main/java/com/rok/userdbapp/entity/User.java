@@ -1,8 +1,6 @@
 package com.rok.userdbapp.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -15,18 +13,20 @@ public class User implements Serializable {
 
 
 
-    @Column(name = "uname")
+    @Column
     private String name;
-    @Column(name = "upass")
+
+    @Column
     private char[] password;
-    private String id;
+    private int id;
 
     @Id
-    public String getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

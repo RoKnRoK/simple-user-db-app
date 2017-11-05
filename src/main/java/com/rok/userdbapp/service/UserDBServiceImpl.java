@@ -1,6 +1,8 @@
 package com.rok.userdbapp.service;
 
+import com.rok.userdbapp.dao.UserDao;
 import com.rok.userdbapp.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,13 +14,12 @@ import java.util.List;
  */
 @Service
 public class UserDBServiceImpl implements UserDBService {
+
+    @Autowired
+    UserDao userDao;
+
     public List<User> getUsers() {
-        System.out.println("Request recieved");
-        User user = new User();
-        user.setName("test");
-        user.setPassword("test".toCharArray());
-        ArrayList<User> users = new ArrayList<>();
-        users.add(user);
-        return users;
+        System.out.println("Retrieving users");
+        return userDao.getUsers();
     }
 }
