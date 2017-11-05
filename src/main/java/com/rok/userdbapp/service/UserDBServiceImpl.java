@@ -12,14 +12,16 @@ import java.util.List;
  * Created by RoK.
  * All rights reserved =)
  */
-@Service
 public class UserDBServiceImpl implements UserDBService {
 
-    @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
     public List<User> getUsers() {
         System.out.println("Retrieving users");
         return userDao.getUsers();
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
 }

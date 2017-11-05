@@ -12,15 +12,14 @@ import java.util.List;
  * Created by RoK.
  * All rights reserved =)
  */
-@Repository
-@Transactional
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext(name = "UserDbUnit")
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public List<User> getUsers() {
         return entityManager.createQuery("SELECT u from User u", User.class).getResultList();
     }
+
 }
