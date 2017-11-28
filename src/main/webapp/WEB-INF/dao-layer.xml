@@ -12,8 +12,14 @@
 
        <tx:annotation-driven transaction-manager="transactionManager"/>
 
+       <bean id="hsqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+              <property name="url" value="jdbc:hsqldb:file:${db.path}"/>
+              <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+       </bean>
+
        <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+              <property name="persistenceXmlLocation" value="classpath:./META-INF/persistence.xml"/>
               <property name="persistenceUnitName" value="UserDbUnit" />
-              <!--<property name="dataSource" ref="hsqlDataSource"/>-->
+              <property name="dataSource" ref="hsqlDataSource"/>
        </bean>
 </beans>
