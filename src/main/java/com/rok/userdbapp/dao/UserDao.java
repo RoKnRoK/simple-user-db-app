@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface UserDao {
 
-    List getUsers();
+    List<User> getUsers(int pageNumber, int pageSize);
+
+    void addUser(User newUser);
 }

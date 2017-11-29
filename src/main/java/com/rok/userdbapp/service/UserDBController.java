@@ -2,9 +2,7 @@ package com.rok.userdbapp.service;
 
 import com.rok.userdbapp.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,9 +20,12 @@ public class UserDBController {
 
 
     @RequestMapping("/list")
-    public List<User> getUsers(){
-        System.out.println("Request received");
-//        return userService.getUsers().stream().map (User::toString).collect(Collectors.joining("\n"));
-        return userService.getUsers();
+    public List<User> getUsers(@RequestParam("page") int pageNumber, @RequestParam("size") int pageSize){
+        return userService.getUsers(pageNumber, pageSize);
+    }
+
+    @PostMapping("/add")
+    public void addUser(@RequestBody User newUser){
+        userService.addUser(newUser);
     }
 }

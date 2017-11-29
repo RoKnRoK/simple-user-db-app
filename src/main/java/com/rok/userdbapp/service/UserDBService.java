@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface UserDBService {
 
-    List<User> getUsers();
+    List<User> getUsers(int pageNumber, int pageSize);
+
+    void addUser(User newUser);
 }

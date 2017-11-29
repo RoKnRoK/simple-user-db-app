@@ -2,10 +2,7 @@ package com.rok.userdbapp.service;
 
 import com.rok.userdbapp.dao.UserDao;
 import com.rok.userdbapp.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,9 +13,13 @@ public class UserDBServiceImpl implements UserDBService {
 
     private UserDao userDao;
 
-    public List<User> getUsers() {
-        System.out.println("Retrieving users");
-        return userDao.getUsers();
+    public List<User> getUsers(int pageNumber, int pageSize) {
+        return userDao.getUsers(pageNumber, pageSize);
+    }
+
+    @Override
+    public void addUser(User newUser) {
+        userDao.addUser(newUser);
     }
 
     public void setUserDao(UserDao userDao) {

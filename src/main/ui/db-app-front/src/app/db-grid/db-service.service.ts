@@ -9,7 +9,7 @@ export class DbServiceService {
 
   getUsers(){
     return this.http
-      .get(environment.appHost + '/userDB/user/list')
+      .get(environment.appHost + '/userDB/user/list?page=1&size=30')
       .map(response => {
         return response.json();
       })

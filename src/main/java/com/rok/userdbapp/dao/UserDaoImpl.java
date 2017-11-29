@@ -1,11 +1,10 @@
 package com.rok.userdbapp.dao;
 
 import com.rok.userdbapp.entity.User;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -18,8 +17,16 @@ public class UserDaoImpl implements UserDao {
     private EntityManager entityManager;
 
     @Override
-    public List<User> getUsers() {
-        return entityManager.createQuery("SELECT u from User u", User.class).getResultList();
+    public List<User> getUsers(int pageNumber, int pageSize) {
+        TypedQuery<User> query = entityManager.createQuery("SELECT u from User u", User.class);
+        query.setFirstResult((pageNumber-1) * pageSize);
+        query.setMaxResults(pageSize);
+        return query.getResultList();
+    }
+
+    @Override
+    public void addUser(User newUser) {
+        entityManager.persist(newUser);
     }
 
 }
