@@ -11,7 +11,7 @@ import java.util.Arrays;
 @Entity
 public class User implements Serializable {
 
-
+    private static long serialVersionUID = 65473829L;
 
     @Column
     private String name;

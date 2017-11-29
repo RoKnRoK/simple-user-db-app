@@ -1,5 +1,17 @@
-<div class="row" *ngFor="let user of users">
-  <div class="xs-col-12">
-    {{ user }}
-  </div>
+<div class="container">
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>User name</th>
+      <th>User password</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td> {{ user.name | titlecase}}</td>
+      <td> {{ user.password }}</td>
+    </tr>
+    </tbody>
+  </table>
+
 </div>

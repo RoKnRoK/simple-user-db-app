@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class DbServiceService {
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   getUsers(){
     return this.http
-      .get('http://localhost:8080/user/list')
+      .get(environment.appHost + '/userDB/user/list')
       .map(response => {
-        response.json();
         return response.json();
       })
   }
