@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DbServiceService } from './db-service.service';
-import { User } from '../shared/user.model';
-import { CreateUserDialog } from '../shared/dialogs/create-user-dialog/create-user-dialog.component';
+import { User } from 'app/shared/user.model';
+import { CreateUserDialog } from 'app/shared/dialogs/create-user-dialog/create-user-dialog.component';
 
 import { MatDialog, MatDialogConfig} from '@angular/material';
 
@@ -13,26 +13,33 @@ import { MatDialog, MatDialogConfig} from '@angular/material';
 })
 export class DbGridComponent implements OnInit {
 
-  users: User[]
+  users: User[];
+  selectedUser: User
 
-  config: MatDialogConfig = {
-        disableClose: true,
-        width: '250px',
-
-    };
 
   constructor(private dbService: DbServiceService,
   public dialog: MatDialog) { }
 
   ngOnInit() {
     this.dbService.getUsers()
-      .subscribe(users => {
-        this.users = users;
+      .subscribe(data => {
+        this.users = data;
       });
   }
 
   onAddUser() {
-      this.dialog.open(CreateUserDialog, this.config)
+      let dialogRef = this.dialog.open(CreateUserDialog, {
+           disableClose: true,
+           width: '250px',
+           data: this.selectedUser
+       });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) { this.dbService.addUser(result); }
+      });
+  }
+
+  setSelectedUser(user: User) {
+    this.selectedUser = user;
   }
 
 }

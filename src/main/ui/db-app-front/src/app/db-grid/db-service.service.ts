@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
+
+import { User } from 'app/shared/user.model'
 
 @Injectable()
 export class DbServiceService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   getUsers(){
-    return this.http
-      .get(environment.appHost + '/userDB/user/list?page=1&size=30')
-      .map(response => {
-        return response.json();
-      })
+  let users;
+     return this.http.get<User[]>(environment.appHost + '/userDB/user/list?page=1&size=30');
+  }
+
+  addUser(user: User) {
+    console.log(user);
+    this.http.post(environment.appHost + '/userDB/user/add', user).subscribe();
   }
 }
+

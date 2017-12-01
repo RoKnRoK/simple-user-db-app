@@ -1,4 +1,5 @@
 <div class="container">
+  {{ selectedUser | json }}
   <table class="table table-bordered table-hover">
     <thead>
     <tr>
@@ -7,16 +8,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of users" (click)="setSelectedUser(user)" [class.active]="user == selectedUser">
       <td> {{ user.name | titlecase}}</td>
       <td> {{ user.password }}</td>
     </tr>
     </tbody>
   </table>
+
   <div class="row">
     <div class="col-xs-10"></div>
     <div class="col-xs-1">
-      <button class="btn btn-primary" (click)="onAddUser()">Add</button>
+      <button class="btn btn-primary" (click)="onAddUser()">{{ selectedUser ? 'Edit' : 'Add' }} </button>
     </div>
     <div class="col-xs-1">
       <button class="btn btn-primary">Search</button>

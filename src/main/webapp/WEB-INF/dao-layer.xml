@@ -10,7 +10,7 @@
               <property name="entityManagerFactory" ref="entityManagerFactory" />
        </bean>
 
-       <tx:annotation-driven transaction-manager="transactionManager"/>
+       <tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager"/>
 
        <bean id="hsqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
               <property name="url" value="jdbc:hsqldb:file:${db.path}"/>
