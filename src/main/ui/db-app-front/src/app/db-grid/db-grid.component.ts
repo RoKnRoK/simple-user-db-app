@@ -14,7 +14,8 @@ import { MatDialog, MatDialogConfig} from '@angular/material';
 export class DbGridComponent implements OnInit {
 
   users: User[];
-  selectedUser: User
+  selectedUser: User;
+  selectedUserIndex: number = -1;
 
 
   constructor(private dbService: DbServiceService,
@@ -34,12 +35,16 @@ export class DbGridComponent implements OnInit {
            data: this.selectedUser
        });
       dialogRef.afterClosed().subscribe(result => {
-        if (result) { this.dbService.addUser(result); }
+        if (result) {
+          this.dbService.putUser(result);
+          if (this.selectedUserIndex) { this.selectedUser = result;}
+        }
       });
   }
 
-  setSelectedUser(user: User) {
-    this.selectedUser = user;
+  setSelectedUserIndex(index: number) {
+    this.selectedUserIndex = index;
+    this.selectedUser = this.users[this.selectedUserIndex];
   }
 
 }

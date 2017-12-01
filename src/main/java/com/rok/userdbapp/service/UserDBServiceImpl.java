@@ -22,6 +22,11 @@ public class UserDBServiceImpl implements UserDBService {
         userDao.addUser(newUser);
     }
 
+    @Override
+    public void addOrUpdateUser(User newUser) {
+        userDao.addOrUpdateUser(newUser);
+    }
+
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }

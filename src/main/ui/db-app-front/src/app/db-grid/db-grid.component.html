@@ -8,7 +8,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of users" (click)="setSelectedUser(user)" [class.active]="user == selectedUser">
+    <tr *ngFor="let user of users; let i = index" (click)="setSelectedUserIndex(i)" [class.active]="i == selectedUserIndex">
       <td> {{ user.name | titlecase}}</td>
       <td> {{ user.password }}</td>
     </tr>

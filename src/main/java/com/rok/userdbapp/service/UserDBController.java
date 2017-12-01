@@ -11,7 +11,7 @@ import java.util.List;
  * All rights reserved =)
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserDBController {
 
@@ -19,13 +19,18 @@ public class UserDBController {
     private UserDBService userService;
 
 
-    @RequestMapping("/list")
+    @RequestMapping("")
     public List<User> getUsers(@RequestParam("page") int pageNumber, @RequestParam("size") int pageSize){
         return userService.getUsers(pageNumber, pageSize);
     }
 
-    @PostMapping("/add")
-    public void addUser(@RequestBody User newUser){
+   // @PostMapping("")
+   /* public void addUser(@RequestBody User newUser){
         userService.addUser(newUser);
+    }*/
+
+    @PutMapping("")
+    public void addOrUpdateUser(@RequestBody User newUser){
+        userService.addOrUpdateUser(newUser);
     }
 }

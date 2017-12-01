@@ -11,12 +11,18 @@ export class DbServiceService {
 
   getUsers(){
   let users;
-     return this.http.get<User[]>(environment.appHost + '/userDB/user/list?page=1&size=30');
+     return this.http.get<User[]>(environment.appHost + '/userDB/users?page=1&size=30');
   }
 
-  addUser(user: User) {
+  putUser(user: User) {
     console.log(user);
-    this.http.post(environment.appHost + '/userDB/user/add', user).subscribe();
+    /*if (user.id) {
+      this.http.post(environment.appHost + '/userDB/users', user).subscribe();
+    }
+    else {
+      this.http.put(environment.appHost + '/userDB/users/'+user.id, user).subscribe();
+    }*/
+    this.http.put(environment.appHost + '/userDB/users', user).subscribe();
   }
 }
 

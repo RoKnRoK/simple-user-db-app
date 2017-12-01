@@ -4,6 +4,7 @@ import com.rok.userdbapp.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
 
-    @PersistenceContext(name = "UserDbUnit")
+    @PersistenceContext(name = "UserDbUnit", type = PersistenceContextType.EXTENDED)
     private EntityManager entityManager;
 
     @Override
@@ -26,6 +27,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User newUser) {
+        entityManager.persist(newUser);
+    }
+
+    @Override
+    public void addOrUpdateUser(User newUser) {
         entityManager.persist(newUser);
     }
 

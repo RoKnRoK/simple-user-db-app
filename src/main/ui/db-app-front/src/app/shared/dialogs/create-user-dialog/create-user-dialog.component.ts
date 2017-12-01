@@ -36,6 +36,10 @@ export class CreateUserDialog implements OnInit {
     });
   }
   onAddUser(){
-    this.dialogRef.close();
+    this.dialogRef.close({
+      name: this.userForm.value.name,
+      password: this.userForm.value.password,
+      id: this.user.id
+    });
   }
 }

@@ -15,4 +15,6 @@ public interface UserDao {
     List<User> getUsers(int pageNumber, int pageSize);
 
     void addUser(User newUser);
+
+    void addOrUpdateUser(User newUser);
 }
