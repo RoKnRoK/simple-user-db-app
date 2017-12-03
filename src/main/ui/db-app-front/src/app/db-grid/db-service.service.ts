@@ -9,9 +9,8 @@ export class DbServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(){
-  let users;
-     return this.http.get<User[]>(environment.appHost + '/userDB/users?page=1&size=30');
+  getUsers(page: number, size: number){
+     return this.http.get<User[]>(environment.appHost + '/userDB/users?page='+page+'&size='+size);
   }
 
   putUser(user: User) {

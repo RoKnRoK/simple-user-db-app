@@ -4,6 +4,7 @@ import { User } from 'app/shared/user.model';
 import { CreateUserDialog } from 'app/shared/dialogs/create-user-dialog/create-user-dialog.component';
 
 import { MatDialog, MatDialogConfig} from '@angular/material';
+import {PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-db-grid',
@@ -22,7 +23,7 @@ export class DbGridComponent implements OnInit {
   public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.dbService.getUsers()
+    this.dbService.getUsers(1, 15)
       .subscribe(data => {
         this.users = data;
       });
@@ -47,4 +48,9 @@ export class DbGridComponent implements OnInit {
     this.selectedUser = this.users[this.selectedUserIndex];
   }
 
+    onPageClicked(pageEvent: PageEvent){
+        this.dbService.getUsers(pageEvent.pageIndex+1, pageEvent.pageSize).subscribe(data => {
+            this.users = data;
+        });;
+    }
 }

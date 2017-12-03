@@ -32,6 +32,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addOrUpdateUser(User newUser) {
+        entityManager.refresh(newUser);
         entityManager.persist(newUser);
     }
 

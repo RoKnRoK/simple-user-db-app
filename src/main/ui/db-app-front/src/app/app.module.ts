@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatPaginatorModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -12,13 +12,15 @@ import { DbGridComponent } from './db-grid/db-grid.component';
 
 import { AlertModule } from 'ngx-bootstrap';
 import { CreateUserDialog } from './shared/dialogs/create-user-dialog/create-user-dialog.component';
+import { PaginatorComponent } from './db-grid/paginator/paginator.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DbGridComponent,
-    CreateUserDialog
+    CreateUserDialog,
+    PaginatorComponent
   ],
   imports: [
     AlertModule.forRoot(),
@@ -26,6 +28,7 @@ import { CreateUserDialog } from './shared/dialogs/create-user-dialog/create-use
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule
   ],
