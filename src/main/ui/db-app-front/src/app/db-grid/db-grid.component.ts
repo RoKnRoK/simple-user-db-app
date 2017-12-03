@@ -42,15 +42,23 @@ export class DbGridComponent implements OnInit {
         }
       });
   }
+    onDeleteUser(selectedUser: User){
+        this.dbService.deleteUser(selectedUser).subscribe();
+    }
 
   setSelectedUserIndex(index: number) {
     this.selectedUserIndex = index;
     this.selectedUser = this.users[this.selectedUserIndex];
   }
 
+    clearSelection(){
+        this.selectedUserIndex = -1;
+        this.selectedUser = undefined;
+    }
+
     onPageClicked(pageEvent: PageEvent){
         this.dbService.getUsers(pageEvent.pageIndex+1, pageEvent.pageSize).subscribe(data => {
             this.users = data;
-        });;
+        });
     }
 }

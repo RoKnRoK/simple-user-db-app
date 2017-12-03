@@ -24,13 +24,13 @@ public class UserDBController {
         return userService.getUsers(pageNumber, pageSize);
     }
 
-   // @PostMapping("")
-   /* public void addUser(@RequestBody User newUser){
-        userService.addUser(newUser);
-    }*/
-
     @PutMapping("")
     public void addOrUpdateUser(@RequestBody User newUser){
         userService.addOrUpdateUser(newUser);
+    }
+
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable int userId){
+        userService.deleteUser(userId);
     }
 }

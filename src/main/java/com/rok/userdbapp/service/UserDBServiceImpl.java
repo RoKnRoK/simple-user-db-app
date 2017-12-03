@@ -27,6 +27,11 @@ public class UserDBServiceImpl implements UserDBService {
         userDao.addOrUpdateUser(newUser);
     }
 
+    @Override
+    public void deleteUser(int userId) {
+        userDao.deleteUser(userId);
+    }
+
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }

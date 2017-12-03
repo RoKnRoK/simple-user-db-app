@@ -14,14 +14,11 @@ export class DbServiceService {
   }
 
   putUser(user: User) {
-    console.log(user);
-    /*if (user.id) {
-      this.http.post(environment.appHost + '/userDB/users', user).subscribe();
-    }
-    else {
-      this.http.put(environment.appHost + '/userDB/users/'+user.id, user).subscribe();
-    }*/
     this.http.put(environment.appHost + '/userDB/users', user).subscribe();
+  }
+
+  deleteUser(user: User){
+    return this.http.delete(environment.appHost + '/userDB/users/'+ user.id);
   }
 }
 

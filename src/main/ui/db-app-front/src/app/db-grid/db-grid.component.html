@@ -1,5 +1,4 @@
-<div class="container">
-  {{ selectedUser | json }}
+<div class="container" (click)="clearSelection()">
   <table class="table table-bordered table-hover">
     <thead>
     <tr>
@@ -8,7 +7,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of users; let i = index" (click)="setSelectedUserIndex(i)" [class.active]="i == selectedUserIndex">
+    <tr *ngFor="let user of users; let i = index" (click)="setSelectedUserIndex(i);$event.stopPropagation()" [class.active]="i == selectedUserIndex">
       <td> {{ user.name | titlecase}}</td>
       <td> {{ user.password }}</td>
     </tr>
@@ -17,12 +16,11 @@
   <app-paginator (page)="onPageClicked($event)"></app-paginator>
 
   <div class="row">
-    <div class="col-xs-10"></div>
-    <div class="col-xs-1">
+    <div class="col-xs-9"></div>
+    <div class="col-xs-3">
       <button class="btn btn-primary" (click)="onAddUser()">{{ selectedUser ? 'Edit' : 'Add' }} </button>
-    </div>
-    <div class="col-xs-1">
       <button class="btn btn-primary">Search</button>
+      <button class="btn btn-danger" (click)="onDeleteUser(selectedUser)" [disabled]="!selectedUser">Delete</button>
     </div>
   </div>
 </div>

@@ -16,4 +16,5 @@ public interface UserDBService {
 
     void addOrUpdateUser(User newUser);
 
+    void deleteUser(int userId);
 }

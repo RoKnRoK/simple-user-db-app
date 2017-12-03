@@ -5,6 +5,7 @@ import com.rok.userdbapp.entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
 
-    @PersistenceContext(name = "UserDbUnit", type = PersistenceContextType.EXTENDED)
+    @PersistenceContext(name = "UserDbUnit")
     private EntityManager entityManager;
 
     @Override
@@ -32,8 +33,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addOrUpdateUser(User newUser) {
-        entityManager.refresh(newUser);
-        entityManager.persist(newUser);
+        entityManager.persist(entityManager.merge(newUser));
+    }
+
+    @Override
+    public void deleteUser(int userId) {
+        Query query = entityManager.createQuery("DELETE FROM User u WHERE u.id = :userId");
+        query.setParameter("userId", userId);
+        query.executeUpdate();
     }
 
 }
