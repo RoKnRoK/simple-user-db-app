@@ -9,16 +9,20 @@ import java.util.Arrays;
  * All rights reserved =)
  */
 @Entity
+@Table(name = "USER_TBL")
 public class User implements Serializable {
 
     private static long serialVersionUID = 65473829L;
 
-    @Column
+
     private String name;
 
-    @Column
+
     private char[] password;
     private int id;
+
+
+    private UserType type;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +34,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "UNAME")
     public String getName() {
         return name;
     }
@@ -38,6 +43,7 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    @Column(name="UPASS")
     public char[] getPassword() {
         return password;
     }
@@ -46,12 +52,23 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    @Column(name="UTYPE")
+    @Enumerated(EnumType.STRING)
+    public UserType getType() {
+        return type;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
                 ", password=" + Arrays.toString(password) +
                 ", id='" + id + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
