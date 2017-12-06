@@ -1,8 +1,11 @@
 package com.rok.userdbapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created by RoK.
@@ -16,13 +19,10 @@ public class User implements Serializable {
 
 
     private String name;
-
-
     private char[] password;
-    private int id;
-
-
     private UserType type;
+    private Date dateCreated;
+    private int id;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,6 +60,17 @@ public class User implements Serializable {
 
     public void setType(UserType type) {
         this.type = type;
+    }
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DATE_CREATED")
+    @JsonFormat(pattern="dd.MM.yyyy")
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     @Override
